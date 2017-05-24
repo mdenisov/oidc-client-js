@@ -20,10 +20,13 @@ export default class PopupWindow {
             this._reject = reject;
         });
 
-        let target = params.popupWindowTarget || DefaultPopupTarget;
-        let features = params.popupWindowFeatures || DefaultPopupFeatures;
+        let {
+        	popupWindowTarget: target = DefaultPopupTarget,
+        	popupWindowFeatures: features = DefaultPopupFeatures
+        } = params;
 
         this._popup = window.open('', target, features);
+        
         if (this._popup) {
             Log.debug("popup successfully created");
             this._checkForPopupClosedTimer = window.setInterval(this._checkForPopupClosed.bind(this), CheckForPopupClosedInterval);
